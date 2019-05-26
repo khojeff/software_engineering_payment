@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "hello",
+    "version": "1.0.0",
+    "title": "Organization"
+  },
+  "host": "localhost:3000",
+  "basepath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/orgs/{org}/comments": {
+      "post": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "Add comment to organization",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comment",
+            "description": "comment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success add comment",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "View comment from an organization",
+        "description": "Enter organization to get all comments",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success view comment",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          },
+          "400": {
+            "description": "Failed add comment",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "Delete comment from an organization",
+        "description": "Update",
+        "parameters": [
+          {
+            "name": "org",
+            "in": "path",
+            "description": "Organization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete comment from an organization"
+          },
+          "400": {
+            "description": "Failed update data"
+          }
+        }
+      }
+    },
+    "/orgs/{org}/members": {
+      "get": {
+        "tags": [
+          "member"
+        ],
+        "summary": "View member from an organization",
+        "description": "Enter organization to get all member",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success view comment",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Member"
+              }
+            }
+          },
+          "400": {
+            "description": "Failed add comment",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/ApiResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "type": "object"
+        },
+        "name": {
+          "type": "string",
+          "example": "This is comment."
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "example": 0
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Member": {
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "type": "object"
+        },
+        "name": {
+          "type": "string",
+          "example": "Person"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "totalFollower": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "totalFollowing": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "example": 0
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
